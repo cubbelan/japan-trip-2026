@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>日本家族旅行 2026 | 精緻行程看板 v1.1</title>
+    <!-- Favicon & Apple Touch Icon: 櫻花旅行主題 -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232C3E50'/%3E%3Cstop offset='100%25' stop-color='%2334495E'/%3E%3C/linearGradient%3E%3ClinearGradient id='pk' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23FBBFCA'/%3E%3Cstop offset='100%25' stop-color='%23F9A8B8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='128' height='128' rx='28' fill='url(%23bg)'/%3E%3Cg transform='translate(64,62)'%3E%3Cg fill='url(%23pk)' opacity='.95'%3E%3Cellipse cx='0' cy='-22' rx='9' ry='18' /%3E%3Cellipse cx='0' cy='-22' rx='9' ry='18' transform='rotate(72)'/%3E%3Cellipse cx='0' cy='-22' rx='9' ry='18' transform='rotate(144)'/%3E%3Cellipse cx='0' cy='-22' rx='9' ry='18' transform='rotate(216)'/%3E%3Cellipse cx='0' cy='-22' rx='9' ry='18' transform='rotate(288)'/%3E%3C/g%3E%3Ccircle r='8' fill='%23F9E4B7' opacity='.9'/%3E%3C/g%3E%3Cg transform='translate(96,28) rotate(30)' fill='white' opacity='.85'%3E%3Cpath d='M0-3 L-12 2 L-10 0 L-12-2 Z'/%3E%3Ccircle r='2.5'/%3E%3C/g%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232C3E50'/%3E%3Cstop offset='100%25' stop-color='%2334495E'/%3E%3C/linearGradient%3E%3ClinearGradient id='pk' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23FBBFCA'/%3E%3Cstop offset='100%25' stop-color='%23F9A8B8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23bg)'/%3E%3Cg transform='translate(90,88)'%3E%3Cg fill='url(%23pk)' opacity='.95'%3E%3Cellipse cx='0' cy='-30' rx='12' ry='25' /%3E%3Cellipse cx='0' cy='-30' rx='12' ry='25' transform='rotate(72)'/%3E%3Cellipse cx='0' cy='-30' rx='12' ry='25' transform='rotate(144)'/%3E%3Cellipse cx='0' cy='-30' rx='12' ry='25' transform='rotate(216)'/%3E%3Cellipse cx='0' cy='-30' rx='12' ry='25' transform='rotate(288)'/%3E%3C/g%3E%3Ccircle r='11' fill='%23F9E4B7' opacity='.9'/%3E%3C/g%3E%3Cg transform='translate(136,38) rotate(30)' fill='white' opacity='.85'%3E%3Cpath d='M0-4 L-16 3 L-14 0 L-16-3 Z'/%3E%3Ccircle r='3.5'/%3E%3C/g%3E%3C/svg%3E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="春季之旅 2026">
+    <meta name="theme-color" content="#2C3E50">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --bg-color: #F9F8F6;
+            --accent: #2C3E50;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: #1C1917;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            overflow-y: scroll;
+        }
+
+        h1, h2, h3, .font-serif { font-family: 'Noto Serif TC', serif; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 卡片與動畫 */
+        .itinerary-card { transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease; }
+        .itinerary-card:active { transform: scale(0.98); }
+        .fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 時間軸垂直線 (已根據左側大 icon 重新校準高度) 
+           確保線條從 icon 的中心點延伸至下一個 icon
+        */
+        .timeline-line::before {
+            content: ''; position: absolute; top: 46px; bottom: -30px; left: 21px; 
+            width: 1px; background-color: #E7E5E4; z-index: 0;
+        }
+        .timeline-item:last-child .timeline-line::before { display: none; }
+
+        /* Bottom Sheet 動畫與背景 */
+        #bottom-sheet { transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1); }
+        #overlay { 
+            background-color: rgba(102, 102, 102, 0.5); 
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            transition: opacity 0.3s ease; 
+        }
+        .sheet-open #bottom-sheet { transform: translateY(0); }
+        .sheet-open #overlay { opacity: 1; pointer-events: auto; }
+
+        /* 交通路線專用樣式 */
+        .transit-line-solid { border-left-width: 4px; border-left-style: solid; }
+        .transit-line-dotted { border-left-width: 4px; border-left-style: dotted; border-color: #D6D3D1; }
+
+        /* 地圖預覽圖樣式 (模擬地圖材質) */
+        .map-texture {
+            background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=600&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%) opacity(0.6) contrast(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 主容器 -->
+    <div class="max-w-xl mx-auto min-h-screen bg-[#F9F8F6] relative shadow-sm overflow-hidden flex flex-col">
+        
+        <!-- 頂部資訊區 -->
+        <header class="pt-12 px-6 pb-5">
+            <div class="flex justify-between items-end mb-2">
+                <span class="text-[11px] font-bold tracking-widest text-[#78716C] uppercase">10人家族旅行 (含幼兒)</span>
+                <span class="text-xs text-[#78716C] flex items-center gap-1.5 font-medium">
+                    <i class="fa-solid fa-map-location-dot opacity-60"></i> 東京‧箱根
+                </span>
+            </div>
+            <h1 class="text-3xl font-bold text-[#1C1917] leading-tight font-serif mb-1">2026 春季之旅</h1>
+            <p class="text-sm text-[#78716C]">4月6日 – 4月12日</p>
+        </header>
+
+        <!-- 日期選擇器 (橫向捲動) -->
+        <div class="sticky top-0 z-20 bg-[#F9F8F6]/95 backdrop-blur-md pt-1 pb-4 border-b border-[#E7E5E4]/60">
+            <div class="flex overflow-x-auto no-scrollbar px-6 gap-2.5 snap-x" id="date-tabs-container"></div>
+        </div>
+
+        <!-- 每日內容區塊 -->
+        <main class="px-6 pt-6 pb-12 flex-1 fade-in" id="main-content">
+            <!-- 英雄圖片與天氣 (景點照片) -->
+            <div class="relative w-full h-48 rounded-[24px] overflow-hidden mb-6 shadow-sm bg-[#E7E5E4]">
+                <img id="hero-image" src="" alt="地點照片" class="w-full h-full object-cover transition-opacity duration-300">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                    <div class="bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl px-3 py-2 flex items-center gap-3 text-white">
+                        <i id="weather-icon" class="fa-solid text-xl drop-shadow-sm"></i>
+                        <div>
+                            <div id="weather-temp" class="text-sm font-bold leading-none mb-1"></div>
+                            <div id="weather-desc" class="text-[11px] opacity-90 leading-none"></div>
+                        </div>
+                    </div>
+                    <div id="hero-location" class="text-white text-sm font-serif font-bold drop-shadow-md tracking-wider"></div>
+                </div>
+            </div>
+
+            <!-- 當日摘要 -->
+            <div class="mb-8 px-1">
+                <h2 id="day-title" class="font-serif text-2xl font-bold text-[#1C1917] mb-1"></h2>
+                <p id="day-subtitle" class="text-[14px] text-[#78716C] leading-relaxed"></p>
+            </div>
+
+            <!-- 行程時間軸容器 (行程卡片) -->
+            <div id="timeline-container" class="flex flex-col gap-5 relative pb-8"></div>
+        </main>
+    </div>
+
+    <!-- Bottom Sheet 遮罩層 -->
+    <div id="overlay" class="fixed inset-0 z-40 opacity-0 pointer-events-none" onclick="closeSheet()"></div>
+
+    <!-- Bottom Sheet 面板 -->
+    <div id="bottom-sheet" class="fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-[32px] shadow-2xl transform translate-y-full max-w-xl mx-auto flex flex-col max-h-[85vh]">
+        <!-- 頂部拖曳指示條 (固定不捲動) -->
+        <div class="flex justify-center pt-3 pb-2 cursor-pointer shrink-0 bg-white rounded-t-[32px] z-30" onclick="closeSheet()">
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full"></div>
+        </div>
+        
+        <!-- 內部獨立捲動區塊 -->
+        <div id="sheet-scroll-container" class="px-6 pb-8 overflow-y-auto no-scrollbar flex-1 relative">
+            
+            <!-- Sticky Header 置頂標題區塊 -->
+            <div class="sticky top-0 bg-white/90 backdrop-blur-[12px] z-20 pt-2 pb-4 mb-5 border-b border-[#E7E5E4]/80 shadow-[0_4px_16px_-4px_rgba(0,0,0,0.03)] -mx-6 px-6">
+                <div class="flex justify-between items-start gap-4">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span id="sheet-time" class="text-[#D4622A] text-[14px] font-bold tracking-wide"></span>
+                            <span id="sheet-tag" class="text-[11px] font-bold px-2 py-0.5 rounded border hidden"></span>
+                        </div>
+                        <h3 id="sheet-title" class="text-[22px] font-serif font-bold text-[#1C1917] leading-tight m-0"></h3>
+                    </div>
+                    <button onclick="closeSheet()" class="w-8 h-8 rounded-full bg-[#F5F5F4] flex items-center justify-center text-[#78716C] shrink-0 active:scale-90 transition-transform mt-1">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 下方可捲動詳細內容 -->
+            <div class="space-y-6">
+                
+                <!-- 導航與地圖預覽區塊 (Map UI) -->
+                <div id="sheet-map-block" class="hidden bg-white border border-[#E7E5E4] rounded-[20px] shadow-sm overflow-hidden">
+                    <div class="p-4 pb-3 flex justify-between items-start gap-3 bg-[#FAFAFA]">
+                        <div>
+                            <h4 id="sheet-map-name" class="text-[16px] font-bold text-[#1C1917] leading-tight mb-1.5"></h4>
+                            <div id="sheet-map-distance" class="inline-flex items-center gap-1.5 bg-[#E2E8F0]/60 text-[#475569] px-2 py-0.5 rounded text-[11px] font-medium"></div>
+                        </div>
+                        <a id="sheet-map-nav-btn" href="#" target="_blank" class="shrink-0 bg-[#2563EB] text-white text-[13px] font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow-sm active:scale-95 transition-transform">
+                            <i class="fa-solid fa-location-arrow"></i> 導航
+                        </a>
+                    </div>
+
+                    <div class="px-4 pb-3 bg-[#FAFAFA]">
+                        <a id="sheet-map-img-link" href="#" target="_blank" class="block relative w-full h-24 bg-[#E5E3DF] rounded-xl overflow-hidden mb-3 border border-[#E7E5E4] cursor-pointer active:opacity-80 transition-opacity">
+                            <div class="absolute inset-0 map-texture"></div>
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <div class="relative -mt-2">
+                                    <i class="fa-solid fa-location-dot text-[#EF4444] text-3xl drop-shadow-md z-10 relative"></i>
+                                    <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-1.5 bg-black/30 rounded-[100%] blur-[2px]"></div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="flex items-start gap-2 text-[#78716C]">
+                            <i class="fa-solid fa-map-pin mt-1 text-[#A8A29E] text-[12px]"></i>
+                            <p id="sheet-map-address" class="text-[13px] leading-relaxed flex-1"></p>
+                        </div>
+                    </div>
+
+                    <div class="px-4 pb-4 pt-3 border-t border-[#F5F5F4]">
+                        <p id="sheet-map-note" class="text-[12px] text-[#8B5CF6] font-medium mb-3 leading-relaxed hidden bg-[#F5F3FF] p-2 rounded-lg border border-[#EDE9FE]"></p>
+                        <div class="flex gap-2">
+                            <button onclick="copyCurrentAddress()" class="flex-1 bg-white border border-[#E2E8F0] text-[#475569] text-[12px] font-bold py-2 rounded-xl active:bg-[#F1F5F9] transition-colors flex justify-center items-center gap-1.5">
+                                <i class="fa-regular fa-copy"></i> 複製地址
+                            </button>
+                            <a id="sheet-map-view-btn" href="#" target="_blank" class="flex-1 bg-white border border-[#E2E8F0] text-[#475569] text-[12px] font-bold py-2 rounded-xl active:bg-[#F1F5F9] transition-colors flex justify-center items-center gap-1.5">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 交通路線詳細區塊 (Transit UI) -->
+                <div id="sheet-transit-container" class="hidden"></div>
+
+                <!-- 餐廳專屬區塊 -->
+                <div id="sheet-restaurant-block" class="hidden border border-[#FEF3C7] bg-[#FFFBEB] rounded-2xl p-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-utensils text-[#D97706]"></i>
+                        <span class="text-[14px] font-bold text-[#B45309]">用餐提醒</span>
+                    </div>
+                    <p id="sheet-restaurant-notes" class="text-[14px] text-[#92400E] leading-relaxed"></p>
+                </div>
+
+                <!-- 備註與重點提醒 -->
+                <div id="sheet-notes-block" class="hidden">
+                    <h4 class="text-[13px] font-bold text-[#57534E] mb-2 px-1">旅遊提醒與備註</h4>
+                    <p id="sheet-notes" class="text-[15px] text-[#1C1917] leading-relaxed px-1"></p>
+                </div>
+            </div>
+
+            <button onclick="closeSheet()" class="mt-8 w-full bg-[#2C3E50] text-white font-bold py-3.5 rounded-xl active:scale-[0.98] transition-transform">
+                我知道了
+            </button>
+        </div>
+    </div>
+
+    <!-- 複製成功提示 (Toast) -->
+    <div id="toast-message" class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-[#1C1917]/90 text-white px-5 py-2.5 rounded-xl shadow-lg text-[13px] font-bold z-[60] transition-all duration-300 opacity-0 pointer-events-none transform translate-y-2 flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-[#4ADE80]"></i> 地址已複製
+    </div>
+
+    <script>
+        let currentAddressToCopy = '';
+
+        // --- 完整行程資料庫 (與 v1.0 相同) ---
+        const itineraryData = [
+            {
+                id: 'day1', date: '4/6', weekday: '一', 
+                title: '抵達與新宿安頓', subtitle: '第一天抵達日本，以辦理入住與周邊熟悉為主，儲備隔天體力。',
+                image: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80',
+                locationName: 'Shinjuku, Tokyo', weather: { temp: '16°C', condition: '多雲', icon: 'fa-cloud' },
+                events: [
+                    { time: '09:10 出發', title: 'JL96 松山 → 羽田', desc: '搭乘日本航空去程航班', icon: 'fa-plane-departure', tag: { text: '航班', color: 'bg-blue-50 text-blue-700 border-blue-200' }, details: { notes: '請提早於 07:10 抵達松山機場辦理報到與托運行李。', map: { name: '松山機場 (出發)', address: '台北市松山區敦化北路340-9號', distance: '🛫 飛往東京羽田機場', query: '台北松山機場' } } },
+                    { 
+                        time: '14:30', title: '羽田空港 → 大久保', desc: '機場交通移動', icon: 'fa-bus', tag: { text: '需分組', color: 'bg-gray-50 text-gray-600 border-gray-200' }, 
+                        details: { 
+                            transitRoute: {
+                                overview: { depTime: '14:30 (估計)', arrTime: '15:40', duration: '約1小時10分', fare: '約 ￥1,450 (示意估算)', transfers: '1回' },
+                                path: [
+                                    { type: 'station', name: '羽田機場第3航廈' },
+                                    { type: 'leg', mode: 'bus', color: 'border-amber-500', bg: 'bg-amber-50', text: 'text-amber-700', name: '利木津巴士', direction: '新宿站西口行', time: '14:30 - 15:25', stops: '直達', platform: '巴士乘車處', duration: '55分' },
+                                    { type: 'walk', instruction: '新宿站外步行轉乘 JR 線 (約 10 分鐘，需留意行李)' },
+                                    { type: 'station', name: '新宿' },
+                                    { type: 'leg', mode: 'train', color: 'border-[#F68B1E]', bg: 'bg-orange-50', text: 'text-orange-700', name: 'JR中央‧總武線', direction: '各站停車‧三鷹行', time: '15:35 - 15:37', stops: '1站', platform: '第16月台 (示意資訊)', duration: '2分' },
+                                    { type: 'station', name: '大久保 (北口)' }
+                                ],
+                                reminders: ["10人團隊且攜帶大型行李，強烈建議第一段搭乘利木津巴士直達新宿，避免在機場線擠電車。", "原文提及若有需要可分組搭乘。推車與行李請於轉乘時放慢腳步。"]
+                            }
+                        } 
+                    },
+                    { time: '17:00', title: '抵達大久保安頓', desc: '入住百人町 Check in', icon: 'fa-house', details: { notes: '抵達日本第一天，以休息為主。入住時間請依 Airbnb 房東確認為準。大久保站北口出來較近。', map: { name: '百人町 Airbnb (示意位置)', address: '東京都新宿区百人町 2-23-41', distance: '🚶♂️ 距大久保站北口步行約 5 分鐘', query: '東京都新宿区百人町2-23-41', note: '出站後請尋找超商旁巷子進入，為安靜的住宅區。' } } },
+                    { time: '18:00', title: '新大久保周邊用餐', desc: '提供新大久保親子餐廳，如 やよい軒', icon: 'fa-store', isRestaurant: true, details: { restaurantNotes: '提供新大久保周邊的親子友善餐廳選擇，例如「やよい軒 (彌生軒)」，擁有多樣定食且環境較適合家庭。如果太累，也可以直接在超市購買便當回民宿享用。', notes: '※ 提醒：4/9 必須完成 4/10 的行李宅配預約。', map: { name: 'やよい軒 新大久保店 (親子備案)', address: '東京都新宿区百人町2-15-22', distance: '🚶♂️ 距車站與民宿皆不遠', query: 'やよい軒 新大久保店' } } }
+                ]
+            },
+            {
+                id: 'day2', date: '4/7', weekday: '二', 
+                title: '上野科學與櫻花', subtitle: '前往上野公園，結合戶外散步放電與室內友善設施的豐富行程。',
+                image: 'https://images.unsplash.com/photo-1522623349500-de37a56ea2a5?auto=format&fit=crop&w=800&q=80',
+                locationName: 'Ueno Park, Tokyo', weather: { temp: '18°C', condition: '晴朗', icon: 'fa-sun' },
+                events: [
+                    { time: '09:00', title: '出發前往上野', desc: 'JR 山手線', icon: 'fa-train', details: { transitRoute: { overview: { depTime: '09:00', arrTime: '09:25', duration: '25分', fare: '約 ￥210', transfers: '0回 (直達)' }, path: [ { type: 'walk', instruction: '從民宿步行約 5 分鐘' }, { type: 'station', name: '新大久保' }, { type: 'leg', mode: 'train', color: 'border-[#84C92B]', bg: 'bg-[#F2F9E8]', text: 'text-[#5A8F1A]', name: 'JR山手線', direction: '外回‧池袋/上野方面', time: '09:05 - 09:25', stops: '10站 (示意)', platform: '第2月台 (示意)', duration: '20分' }, { type: 'station', name: '上野 (公園口出站)' } ], reminders: ["推車族建議：抵達上野站後請務必尋找「公園口」出站，出站即是上野公園，且備有電梯較方便移動。"] } } },
+                    { time: '09:40', title: '上野公園散步', desc: '入館前放電', icon: 'fa-tree', details: { notes: '進室內館前，可先短暫散步 15-20 分鐘讓幼兒跑跳放電。4月初為櫻花季，人潮可能較多需注意。', map: { name: '上野恩賜公園', address: '東京都台東区上野公園', distance: '🚶♂️ 距上野站公園口步行 1 分鐘', query: '上野恩賜公園' } } },
+                    { time: '10:00', title: '國立科學博物館', desc: '恐龍與親子展示', icon: 'fa-building-columns', tag: { text: '親子友善', color: 'bg-green-50 text-green-700 border-green-200' }, details: { notes: '一般展示無需預約。推車可直接入館。館內有幼兒互動區「コンパス」(需另預約)。', map: { name: '國立科學博物館', address: '東京都台東区上野公園 7-20', distance: '🚶♂️ 距上野站公園口步行約 5-8 分鐘', query: '国立科学博物館', note: '推車建議走主建築右側的無障礙坡道進入' } } },
+                    { time: '12:30', title: '午餐時間', desc: '公園或阿美橫丁', icon: 'fa-utensils', isRestaurant: true, details: { restaurantNotes: '建議避開尖峰時段，或選擇上野公園內的精緻食堂 (如上野精養軒、韻松亭)，空間較寬敞適合推車。若前往阿美橫丁人潮較擁擠需留意。' } }
+                ]
+            },
+            {
+                id: 'day3', date: '4/8', weekday: '三', 
+                title: '鐵道博物館巡禮', subtitle: '不受天氣影響的全室內景點，專為幼童準備的鐵道迷天堂。',
+                image: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=800&q=80',
+                locationName: 'Omiya, Saitama', weather: { temp: '17°C', condition: '陰雨', icon: 'fa-cloud-rain' },
+                events: [
+                    { time: '09:30', title: '出發前往大宮', desc: 'JR湘南新宿線轉New Shuttle', icon: 'fa-train', details: { transitRoute: { overview: { depTime: '09:30', arrTime: '10:15', duration: '約45分', fare: '約 ￥660 (示意)', transfers: '1回' }, path: [ { type: 'station', name: '新宿' }, { type: 'leg', mode: 'train', color: 'border-[#E25822]', bg: 'bg-[#FDF0EC]', text: 'text-[#B33F14]', name: 'JR湘南新宿線', direction: '宇都宮線直通‧北行', time: '09:30 - 10:03', stops: '3站', platform: '第4月台 (請現場確認)', duration: '33分' }, { type: 'walk', instruction: '大宮站內步行轉乘 (約5-8分，依指示牌往新都市交通)' }, { type: 'station', name: '大宮' }, { type: 'leg', mode: 'train', color: 'border-rose-500', bg: 'bg-rose-50', text: 'text-rose-700', name: '埼玉新都市交通 (New Shuttle)', direction: '內宿行', time: '10:12 - 10:15', stops: '1站', platform: '專用月台', duration: '3分' }, { type: 'station', name: '鐵道博物館' } ], reminders: ["新宿站月台較複雜，請務必認明「湘南新宿線 (北行/大宮方面)」。"] } } },
+                    { time: '10:30', title: '鐵道博物館', desc: '全室內親子放電', icon: 'fa-train-tram', tag: { text: '全室內', color: 'bg-purple-50 text-purple-700 border-purple-200' }, details: { notes: '出站即達。館內無障礙設施完善，推車非常方便。有許多模擬駕駛與幼兒專屬遊戲室，是雨天或低溫備案的首選。', map: { name: '鐵道博物館', address: '埼玉県さいたま市大宮区大成町3丁目47', distance: '🚉 鐵道博物館站出站直達', query: '鉄道博物館 (さいたま市)' } } },
+                    { time: '12:30', title: '館內午餐', desc: '特色鐵道便當', icon: 'fa-utensils', isRestaurant: true, details: { restaurantNotes: '可於 1F 或 2F 購買特色「火車造型便當」，並至館內指定的「午餐列車 (Lunch Train)」車廂內享用。' } }
+                ]
+            },
+            {
+                id: 'day4', date: '4/9', weekday: '四', 
+                title: '鎌倉海岸與打包', subtitle: '鎌倉半日遊，傍晚提早返回市區完成重要的行李宅配手續。',
+                image: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=800&q=80',
+                locationName: 'Kamakura, Kanagawa', weather: { temp: '19°C', condition: '晴朗', icon: 'fa-sun' },
+                events: [
+                    { time: '09:00', title: '出發前往鎌倉', desc: '搭乘湘南新宿線直達', icon: 'fa-train', details: { transitRoute: { overview: { depTime: '09:00', arrTime: '10:00', duration: '約60分', fare: '約 ￥940', transfers: '0回 (直達)' }, path: [ { type: 'station', name: '新宿' }, { type: 'leg', mode: 'train', color: 'border-[#E25822]', bg: 'bg-[#FDF0EC]', text: 'text-[#B33F14]', name: 'JR湘南新宿線', direction: '橫須賀線直通‧逗子/大船行', time: '09:00 - 10:00', stops: '約8站 (示意)', platform: '第1或2月台', duration: '60分' }, { type: 'station', name: '鎌倉 (東口出站)' } ], reminders: ["請務必搭乘開往「逗子/大船」方向的列車，不用轉車即可直達鎌倉。"] } } },
+                    { time: '10:30', title: '小町通 / 鶴岡八幡宮', desc: '老街散策', icon: 'fa-torii-gate', details: { notes: '小町通適合吃吃喝喝，但路面較窄，推車在人潮多時需稍加注意。一路步行至底即為鶴岡八幡宮。', map: { name: '鶴岡八幡宮', address: '神奈川県鎌倉市雪ノ下2丁目1-31', distance: '🚶♂️ 距鎌倉站步行約 10-15 分鐘', query: '鶴岡八幡宮', note: '沿著小町通直行到底即可抵達正門。' } } },
+                    { time: '晚上', title: '整理行李‧辦理宅配', desc: '前往箱根的準備', icon: 'fa-box', tag: { text: '重要任務', color: 'bg-red-50 text-red-700 border-red-200' }, details: { notes: '🔥 今晚必須完成黑貓宅配單填寫與大行李打包！確保 4/10 早上能順利將大行李寄往機場或後續飯店，明日只需帶輕便行李前往箱根。' } }
+                ]
+            },
+            {
+                id: 'day5', date: '4/10', weekday: '五', 
+                title: '出發前往箱根', subtitle: '換乘多種交通工具的移動日，輕裝上陣體驗山林之美。',
+                image: 'https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80',
+                locationName: 'Hakone, Kanagawa', weather: { temp: '15°C', condition: '多雲時晴', icon: 'fa-cloud-sun' },
+                events: [
+                    { time: '10:30', title: '新宿 → 箱根', desc: '小田急線', icon: 'fa-train', details: { transitRoute: { overview: { depTime: '10:30', arrTime: '12:25', duration: '約1小時55分', fare: '周遊券涵蓋', transfers: '1回' }, path: [ { type: 'station', name: '新宿 (小田急線西口)' }, { type: 'leg', mode: 'train', color: 'border-[#0080C6]', bg: 'bg-[#E5F5FC]', text: 'text-[#005C8F]', name: '小田急小田原線', direction: '急行/快速急行‧小田原行', time: '10:30 - 12:00', stops: '多站', platform: '地下月台', duration: '約90分' }, { type: 'walk', instruction: '小田原站內轉乘 (同月台對側或依指標步行 2 分鐘)' }, { type: 'station', name: '小田原' }, { type: 'leg', mode: 'train', color: 'border-red-600', bg: 'bg-red-50', text: 'text-red-700', name: '箱根登山電車', direction: '箱根湯本行', time: '12:10 - 12:25', stops: '3站', platform: '第11月台 (示意)', duration: '15分' }, { type: 'station', name: '箱根湯本' } ], reminders: ["10人團隊建議搭乘「一般急行/快速急行」即可（周遊券已含）。"] } } },
+                    { time: '12:30', title: '箱根湯本 午餐', desc: '車站周邊用餐', icon: 'fa-utensils', isRestaurant: true, details: { restaurantNotes: '10人團隊用餐不易，強烈建議找可「分桌」的餐廳（如蕎麥麵店、洋食餐廳），以節省候位時間。', map: { name: '箱根湯本站前商店街', address: '神奈川県足柄下郡箱根町湯本', distance: '🚶♂️ 車站正前方', query: '箱根湯本駅' } } },
+                    { time: '14:00', title: '箱根登山電車 → 強羅', desc: '前往半山腰', icon: 'fa-train-tram', details: { notes: '搭乘箱根登山電車(往強羅)，車程約 40 分鐘。電車以「之」字形爬升，非常有特色。', map: { name: '強羅站 (箱根登山鐵道)', address: '神奈川県足柄下郡箱根町強羅1300', distance: '🚞 箱根湯本搭乘登山電車約 40 分鐘', query: '強羅駅' } } }
+                ]
+            },
+            {
+                id: 'day6', date: '4/11', weekday: '六', 
+                title: '大湧谷與蘆之湖', subtitle: '箱根經典環線，需隨時留意交通設施運行狀況。',
+                image: 'https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?auto=format&fit=crop&w=800&q=80',
+                locationName: 'Owakudani, Hakone', weather: { temp: '12°C', condition: '強風', icon: 'fa-wind' },
+                events: [
+                    { time: '09:30', title: '強羅 → 大湧谷', desc: '纜車接力', icon: 'fa-cable-car', tag: { text: '需確認', color: 'bg-yellow-50 text-yellow-700 border-yellow-200' }, details: { notes: '搭乘登山纜車至早雲山，轉乘空中纜車至大湧谷。⚠️ 出發前務必確認空中纜車是否因強風停駛。若停駛需改搭替代巴士。' } },
+                    { time: '11:00', title: '大湧谷 黑玉子', desc: '名產與午餐', icon: 'fa-egg', details: { notes: '品嚐據說吃一顆延壽7年的「黑玉子」。山頂風大氣溫較低，請務必幫幼兒準備防風保暖衣物。', map: { name: '大湧谷', address: '神奈川県足柄下郡箱根町仙石原1251', distance: '🚡 空中纜車大湧谷站出站即達', query: '大涌谷', note: '山頂風大，導航僅供相對位置參考 (示意資訊)' } } },
+                    { time: '14:30', title: '蘆之湖 海賊船', desc: '前往元箱根港', icon: 'fa-ship', details: { notes: '欣賞湖上鳥居與富士山絕景（視天氣）。周遊券可免費搭乘標準艙。', map: { name: '蘆之湖 (桃源台港)', address: '神奈川県足柄下郡箱根町元箱根164', distance: '🚡 大湧谷搭乘空中纜車至終點站', query: '桃源台駅' } } }
+                ]
+            },
+            {
+                id: 'day7', date: '4/12', weekday: '日',
+                title: '返程回台', subtitle: '搭乘星宇航空 JX803 返回台灣，結束美好旅程。',
+                image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80',
+                locationName: 'Narita Airport, Tokyo', weather: { temp: '14°C', condition: '晴朗', icon: 'fa-sun' },
+                events: [
+                    { time: '前往機場', title: '箱根 → 成田機場', desc: '搭乘特快列車', icon: 'fa-train', details: { notes: '自箱根搭乘小田急至新宿，轉乘 JR 成田特快（N\'EX）直達成田機場。建議起飛前 3 小時抵達航廈辦理手續。' } },
+                    { time: '出發', title: 'JX803 成田 → 桃園', desc: '星宇航空', icon: 'fa-plane-departure', tag: { text: '航班', color: 'bg-blue-50 text-blue-700 border-blue-200' }, details: { notes: '星宇航空 JX803。成田機場第一航廈（T1）出發。請提前確認登機門及最新班機資訊。' } }
+                ]
+            }
+        ];
+
+        let currentDayId = 'day1';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTabs();
+            renderDay(currentDayId);
+        });
+
+        // 產生類別專屬的顏色樣式 (視覺分類系統)
+        function getIconCategoryStyle(iconClass) {
+            if (iconClass.match(/plane|train|bus|ship|cable-car|route/)) {
+                return { bg: 'bg-[#F1F5F9]', border: 'border-[#E2E8F0]', text: 'text-[#475569]' }; // 交通 (Slate 灰藍)
+            } else if (iconClass.match(/house|bed|hotel/)) {
+                return { bg: 'bg-[#F0FDF4]', border: 'border-[#D1FAE5]', text: 'text-[#059669]' }; // 住宿 (Emerald 翠綠)
+            } else if (iconClass.match(/utensils|store|egg/)) {
+                return { bg: 'bg-[#FFFBEB]', border: 'border-[#FEF3C7]', text: 'text-[#D97706]' }; // 餐飲 (Amber 暖橘)
+            } else if (iconClass.match(/box|suitcase/)) {
+                return { bg: 'bg-[#F5F3FF]', border: 'border-[#EDE9FE]', text: 'text-[#7C3AED]' }; // 任務 (Purple 紫)
+            } else {
+                return { bg: 'bg-[#FFF1F2]', border: 'border-[#FFE4E6]', text: 'text-[#E11D48]' }; // 景點 (Rose 玫瑰)
+            }
+        }
+
+        function renderTabs() {
+            const container = document.getElementById('date-tabs-container');
+            container.innerHTML = itineraryData.map(day => `
+                <button onclick="switchDay('${day.id}')" id="tab-${day.id}" class="date-tab snap-start shrink-0 flex flex-col items-center justify-center w-[68px] h-[84px] rounded-[20px] transition-all duration-300 ${day.id === currentDayId ? 'bg-[#2C3E50] text-white shadow-md scale-100' : 'bg-white text-[#78716C] border border-[#E7E5E4] scale-95 opacity-80'}">
+                    <span class="text-2xl font-serif leading-none ${day.id === currentDayId ? 'text-white' : 'text-[#1C1917]'}">${day.date.split('/')[1]}</span>
+                    <span class="text-[11px] font-bold uppercase tracking-wider mt-1 ${day.id === currentDayId ? 'opacity-80' : ''}">${day.weekday}</span>
+                </button>
+            `).join('');
+        }
+
+        function switchDay(dayId) {
+            if (currentDayId === dayId) return;
+            currentDayId = dayId;
+            renderTabs();
+            document.getElementById(`tab-${dayId}`).scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+            const mainContent = document.getElementById('main-content');
+            mainContent.classList.remove('fade-in');
+            void mainContent.offsetWidth; 
+            mainContent.classList.add('fade-in');
+            renderDay(dayId);
+        }
+
+        // [核心修改區] 渲染每日主要行程卡片
+        function renderDay(dayId) {
+            const data = itineraryData.find(d => d.id === dayId);
+            if (!data) return;
+
+            const heroImg = document.getElementById('hero-image');
+            heroImg.style.opacity = '0.5'; 
+            heroImg.src = data.image;
+            heroImg.onload = () => { heroImg.style.opacity = '1'; }; 
+
+            document.getElementById('hero-location').textContent = data.locationName;
+            document.getElementById('weather-icon').className = `fa-solid ${data.weather.icon} text-xl drop-shadow-sm`;
+            document.getElementById('weather-temp').textContent = data.weather.temp;
+            document.getElementById('weather-desc').textContent = data.weather.condition;
+
+            document.getElementById('day-title').textContent = data.title;
+            document.getElementById('day-subtitle').textContent = data.subtitle;
+
+            const timelineHtml = data.events.map((event) => {
+                const eventDataStr = encodeURIComponent(JSON.stringify(event));
+                // 取得對應類型的 Icon 樣式設定
+                const iconStyle = getIconCategoryStyle(event.icon);
+                
+                return `
+                <div class="timeline-item relative pl-[52px]">
+                    <div class="timeline-line absolute left-0 top-0 bottom-0 w-full"></div>
+                    
+                    <!-- 時間軸上的節點圓點 (高度已配合左側大 Icon 水平置中校準) -->
+                    ${event.tag && event.tag.text === '重要任務' ? 
+                      `<div class="absolute left-[15px] top-[39px] w-3.5 h-3.5 rounded-full bg-[#EF4444] ring-4 ring-[#F9F8F6] z-10 shadow-sm"></div>` :
+                      `<div class="absolute left-[17px] top-[41px] w-2.5 h-2.5 rounded-full border-2 border-[#2C3E50] bg-[#F9F8F6] ring-4 ring-[#F9F8F6] z-10"></div>`
+                    }
+                    
+                    <div class="itinerary-card bg-white rounded-[24px] p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-[#F5F5F4] cursor-pointer relative overflow-hidden group" onclick="openSheet('${eventDataStr}')">
+                        <div class="flex items-start gap-4">
+                            
+                            <!-- [全新] 左側：視覺分類 Icon 錨點 -->
+                            <div class="w-[52px] h-[52px] shrink-0 rounded-[18px] ${iconStyle.bg} ${iconStyle.border} border flex items-center justify-center relative z-10 shadow-sm transition-transform duration-300 group-active:scale-95">
+                                <i class="fa-solid ${event.icon} ${iconStyle.text} text-[22px]"></i>
+                            </div>
+                            
+                            <!-- 右側：內容區塊與呼吸感排版 -->
+                            <div class="flex-1 min-w-0 pt-0.5">
+                                <div class="flex justify-between items-start gap-2 mb-1.5">
+                                    <div class="text-[13px] font-bold text-[#A8A29E] tracking-wider flex items-center gap-1.5">
+                                        <i class="fa-regular fa-clock text-[11px] opacity-70"></i> ${event.time}
+                                    </div>
+                                    ${event.tag ? `<span class="${event.tag.color} text-[10px] font-bold px-2 py-0.5 rounded-md tracking-wider border whitespace-nowrap shrink-0">${event.tag.text}</span>` : ''}
+                                </div>
+                                <h3 class="font-serif text-[18px] font-bold text-[#1C1917] leading-snug mb-1.5">${event.title}</h3>
+                                <p class="text-[14px] text-[#78716C] leading-relaxed line-clamp-2">${event.desc}</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+            document.getElementById('timeline-container').innerHTML = timelineHtml;
+        }
+
+        // --- 以下為 Transit UI、Sheet 開關、地圖模組等功能 (與 v1.0 完全相同) ---
+        function generateTransitHTML(transitRoute) {
+            const overview = transitRoute.overview;
+            let html = `
+            <div class="mb-4">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fa-solid fa-route text-[#0ea5e9]"></i>
+                    <span class="text-[14px] font-bold text-[#0284c7]">乘換指引</span>
+                </div>
+                <div class="bg-[#F8FAFC] rounded-xl p-3.5 flex justify-between items-center border border-[#E2E8F0] shadow-sm">
+                    <div class="text-center">
+                        <div class="text-[11px] text-[#64748B] mb-0.5 font-medium">時間</div>
+                        <div class="text-[13px] font-bold text-[#1E293B]">${overview.depTime} <i class="fa-solid fa-angle-right text-[10px] text-[#94A3B8] mx-0.5"></i> ${overview.arrTime}</div>
+                    </div>
+                    <div class="w-px h-8 bg-[#E2E8F0]"></div>
+                    <div class="text-center">
+                        <div class="text-[11px] text-[#64748B] mb-0.5 font-medium">總時長</div>
+                        <div class="text-[13px] font-bold text-[#1E293B]">${overview.duration}</div>
+                    </div>
+                    <div class="w-px h-8 bg-[#E2E8F0]"></div>
+                    <div class="text-center">
+                        <div class="text-[11px] text-[#64748B] mb-0.5 font-medium">乘換</div>
+                        <div class="text-[13px] font-bold text-[#1E293B]">${overview.transfers}</div>
+                    </div>
+                    <div class="w-px h-8 bg-[#E2E8F0]"></div>
+                    <div class="text-center">
+                        <div class="text-[11px] text-[#64748B] mb-0.5 font-medium">票價</div>
+                        <div class="text-[13px] font-bold text-[#1E293B]">${overview.fare}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="pl-2 pb-2">`;
+
+            transitRoute.path.forEach((node, index) => {
+                if (node.type === 'station') {
+                    html += `
+                    <div class="flex items-center gap-2.5 relative z-10 ${index !== 0 ? 'mt-0' : ''}">
+                        <div class="w-3.5 h-3.5 rounded-full border-[3px] border-[#334155] bg-white z-10"></div>
+                        <div class="font-bold text-[15px] text-[#0F172A] tracking-wide">${node.name}</div>
+                    </div>`;
+                } else if (node.type === 'leg') {
+                    html += `
+                    <div class="transit-line-solid ${node.color} ml-[6px] pl-4 py-3 relative">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="${node.bg} ${node.text} text-[11px] font-bold px-2 py-0.5 rounded flex items-center gap-1.5 border border-black/5">
+                                <i class="fa-solid ${node.mode === 'bus' ? 'fa-bus' : 'fa-train'}"></i> ${node.name}
+                            </span>
+                            <span class="text-[12px] font-bold text-[#475569]">${node.time}</span>
+                        </div>
+                        <div class="text-[14px] font-bold text-[#1E293B] mb-1.5">往 ${node.direction}</div>
+                        <div class="flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-[#64748B] font-medium">
+                            <span class="flex items-center gap-1"><i class="fa-regular fa-clock"></i> 乘車 ${node.duration}</span>
+                            <span class="flex items-center gap-1"><i class="fa-solid fa-ellipsis"></i> ${node.stops}</span>
+                            <span class="flex items-center gap-1"><i class="fa-solid fa-signs-post"></i> ${node.platform}</span>
+                        </div>
+                    </div>`;
+                } else if (node.type === 'walk') {
+                    html += `
+                    <div class="transit-line-dotted ml-[6px] pl-4 py-2.5 relative">
+                        <div class="text-[12px] font-medium text-[#64748B] flex items-center gap-1.5">
+                            <i class="fa-solid fa-person-walking text-[#94A3B8]"></i> ${node.instruction}
+                        </div>
+                    </div>`;
+                }
+            });
+
+            html += `</div>`;
+            if (transitRoute.reminders && transitRoute.reminders.length > 0) {
+                html += `
+                <div class="mt-2 bg-[#EEF2FF] border border-[#E0E7FF] rounded-xl p-3">
+                    <div class="text-[12px] font-bold text-[#4338CA] mb-1.5 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-info"></i> 乘車提醒
+                    </div>
+                    <ul class="list-disc list-outside ml-4 text-[13px] text-[#3730A3] space-y-1">
+                        ${transitRoute.reminders.map(r => `<li>${r}</li>`).join('')}
+                    </ul>
+                </div>`;
+            }
+            return html;
+        }
+
+        function openSheet(encodedData) {
+            const event = JSON.parse(decodeURIComponent(encodedData));
+            
+            document.getElementById('sheet-time').textContent = event.time;
+            document.getElementById('sheet-title').textContent = event.title;
+            
+            const tagEl = document.getElementById('sheet-tag');
+            if(event.tag) {
+                tagEl.textContent = event.tag.text;
+                tagEl.className = `text-[11px] font-bold px-2 py-0.5 rounded border ${event.tag.color}`;
+                tagEl.classList.remove('hidden');
+            } else {
+                tagEl.classList.add('hidden');
+            }
+
+            const mapBlock = document.getElementById('sheet-map-block');
+            
+            if (event.details && event.details.map) {
+                const mapData = event.details.map;
+                currentAddressToCopy = mapData.address;
+
+                document.getElementById('sheet-map-name').textContent = mapData.name;
+                document.getElementById('sheet-map-address').textContent = mapData.address;
+                
+                const distEl = document.getElementById('sheet-map-distance');
+                if (mapData.distance) {
+                    distEl.innerHTML = mapData.distance;
+                    distEl.classList.remove('hidden');
+                } else {
+                    distEl.classList.add('hidden');
+                }
+
+                const encodedQuery = encodeURIComponent(mapData.query || mapData.address);
+                const gmapsDirUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedQuery}`;
+                const gmapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
+                
+                document.getElementById('sheet-map-nav-btn').href = gmapsDirUrl;
+                document.getElementById('sheet-map-view-btn').href = gmapsSearchUrl;
+                document.getElementById('sheet-map-img-link').href = gmapsSearchUrl;
+
+                const noteEl = document.getElementById('sheet-map-note');
+                if (mapData.note) {
+                    noteEl.textContent = `💡 ${mapData.note}`;
+                    noteEl.classList.remove('hidden');
+                } else {
+                    noteEl.classList.add('hidden');
+                }
+
+                mapBlock.classList.remove('hidden');
+            } else {
+                mapBlock.classList.add('hidden');
+            }
+
+            const transitContainer = document.getElementById('sheet-transit-container');
+            if(event.details && event.details.transitRoute) {
+                transitContainer.innerHTML = generateTransitHTML(event.details.transitRoute);
+                transitContainer.classList.remove('hidden');
+            } else {
+                transitContainer.classList.add('hidden');
+            }
+
+            const restBlock = document.getElementById('sheet-restaurant-block');
+            if(event.isRestaurant && event.details && event.details.restaurantNotes) {
+                document.getElementById('sheet-restaurant-notes').textContent = event.details.restaurantNotes;
+                restBlock.classList.remove('hidden');
+            } else {
+                restBlock.classList.add('hidden');
+            }
+
+            const notesBlock = document.getElementById('sheet-notes-block');
+            if(event.details && event.details.notes) {
+                document.getElementById('sheet-notes').textContent = event.details.notes;
+                notesBlock.classList.remove('hidden');
+            } else {
+                notesBlock.classList.add('hidden');
+            }
+
+            const scrollContainer = document.getElementById('sheet-scroll-container');
+            if (scrollContainer) scrollContainer.scrollTop = 0;
+
+            setTimeout(() => {
+                document.body.classList.add('sheet-open');
+                document.body.style.overflow = 'hidden'; 
+            }, 10);
+        }
+
+        function closeSheet() {
+            document.body.classList.remove('sheet-open');
+            setTimeout(() => {
+                document.body.style.overflow = 'auto'; 
+            }, 300); 
+        }
+
+        function copyCurrentAddress() {
+            if (!currentAddressToCopy) return;
+            const textarea = document.createElement('textarea');
+            textarea.value = currentAddressToCopy;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (err) {
+                console.error('複製失敗', err);
+                alert('複製失敗，請手動複製');
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast-message');
+            toast.classList.remove('opacity-0', 'translate-y-2');
+            
+            if(window.toastTimeout) clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
