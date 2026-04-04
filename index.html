@@ -96,7 +96,7 @@
 
         <!-- 日期選擇器 (橫向捲動) -->
         <div class="sticky top-0 z-20 bg-[#F9F8F6]/95 backdrop-blur-md pt-1 pb-4 border-b border-[#E7E5E4]/60">
-            <div class="flex overflow-x-auto no-scrollbar px-6 gap-2.5 snap-x" id="date-tabs-container"></div>
+            <div class="flex overflow-x-auto no-scrollbar gap-2.5 snap-x" id="date-tabs-container" style="padding-left:24px; padding-right:24px; scroll-padding-left:24px;"></div>
         </div>
 
         <!-- 每日內容區塊 -->
@@ -173,15 +173,23 @@
                     </div>
 
                     <div class="px-4 pb-3 bg-[#FAFAFA]">
-                        <a id="sheet-map-img-link" href="#" target="_blank" class="block relative w-full h-24 bg-[#E5E3DF] rounded-xl overflow-hidden mb-3 border border-[#E7E5E4] cursor-pointer active:opacity-80 transition-opacity">
-                            <div class="absolute inset-0 map-texture"></div>
-                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                <div class="relative -mt-2">
-                                    <i class="fa-solid fa-location-dot text-[#EF4444] text-3xl drop-shadow-md z-10 relative"></i>
-                                    <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-1.5 bg-black/30 rounded-[100%] blur-[2px]"></div>
-                                </div>
+                        <div class="relative w-full h-40 bg-[#E5E3DF] rounded-xl overflow-hidden mb-3 border border-[#E7E5E4]">
+                            <iframe
+                                id="sheet-map-iframe"
+                                width="100%"
+                                height="100%"
+                                frameborder="0"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                src=""
+                                class="absolute inset-0 w-full h-full"
+                            ></iframe>
+                            <div id="sheet-map-placeholder" class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-[#E5E3DF]">
+                                <i class="fa-solid fa-map-location-dot text-3xl text-[#A8A29E]"></i>
+                                <span class="text-[12px] text-[#78716C] font-medium">地圖載入中…</span>
                             </div>
-                        </a>
+                        </div>
                         <div class="flex items-start gap-2 text-[#78716C]">
                             <i class="fa-solid fa-map-pin mt-1 text-[#A8A29E] text-[12px]"></i>
                             <p id="sheet-map-address" class="text-[13px] leading-relaxed flex-1"></p>
@@ -216,7 +224,7 @@
                 <!-- 備註與重點提醒 -->
                 <div id="sheet-notes-block" class="hidden">
                     <h4 class="text-[13px] font-bold text-[#57534E] mb-2 px-1">旅遊提醒與備註</h4>
-                    <p id="sheet-notes" class="text-[15px] text-[#1C1917] leading-relaxed px-1"></p>
+                    <div id="sheet-notes" class="text-[15px] text-[#1C1917] leading-relaxed px-1"></div>
                 </div>
             </div>
 
@@ -304,7 +312,7 @@
                 image: 'https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=800&q=80',
                 locationName: 'Hakone, Kanagawa', weather: { temp: '15°C', condition: '多雲時晴', icon: 'fa-cloud-sun' },
                 events: [
-                    { time: '10:30', title: '新宿 → 箱根', desc: '小田急線', icon: 'fa-train', details: { transitRoute: { overview: { depTime: '10:30', arrTime: '12:25', duration: '約1小時55分', fare: '周遊券涵蓋', transfers: '1回' }, path: [ { type: 'station', name: '新宿 (小田急線西口)' }, { type: 'leg', mode: 'train', color: 'border-[#0080C6]', bg: 'bg-[#E5F5FC]', text: 'text-[#005C8F]', name: '小田急小田原線', direction: '急行/快速急行‧小田原行', time: '10:30 - 12:00', stops: '多站', platform: '地下月台', duration: '約90分' }, { type: 'walk', instruction: '小田原站內轉乘 (同月台對側或依指標步行 2 分鐘)' }, { type: 'station', name: '小田原' }, { type: 'leg', mode: 'train', color: 'border-red-600', bg: 'bg-red-50', text: 'text-red-700', name: '箱根登山電車', direction: '箱根湯本行', time: '12:10 - 12:25', stops: '3站', platform: '第11月台 (示意)', duration: '15分' }, { type: 'station', name: '箱根湯本' } ], reminders: ["10人團隊建議搭乘「一般急行/快速急行」即可（周遊券已含）。"] } } },
+                    { time: '11:00', title: '新宿 → 箱根湯本', desc: '小田急ロマンスカー箱根5號', icon: 'fa-train', tag: { text: '已訂位', color: 'bg-green-50 text-green-700 border-green-200' }, details: { notesHtml: `<div class="space-y-3"><div class="flex items-center gap-2 text-[13px] font-bold text-[#15803D] bg-[#F0FDF4] border border-[#BBF7D0] rounded-lg px-3 py-2"><i class="fa-solid fa-circle-check"></i>已完成訂位，請對號入座</div><div class="text-[12px] text-[#78716C] font-medium px-0.5"><i class="fa-solid fa-train mr-1 opacity-60"></i>03號車廂 · 親子友善座位 · Row 10–12 相鄰<span class="ml-2 inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#DBEAFE] inline-block border border-[#BFDBFE]"></span>成人</span><span class="ml-1.5 inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-[#FCE7F3] inline-block border border-[#FBCFE8]"></span>兒童</span></div><div class="bg-white border border-[#E7E5E4] rounded-xl overflow-hidden"><div class="flex items-center justify-between px-3 py-2 bg-[#F8FAFC] border-b border-[#E7E5E4]"><div><span class="text-[11px] font-bold text-[#78716C] tracking-wider">訂位 A</span><span class="ml-2 text-[11px] text-[#A8A29E]">No. 00058</span></div><div class="flex items-center gap-2.5"><span class="text-[11px] text-[#78716C]">成人3 / 兒童2</span><span class="text-[13px] font-bold text-[#1C1917]">¥4,610</span></div></div><div class="px-3 py-2.5 flex flex-wrap gap-1.5"><span class="text-[12px] font-bold px-2 py-0.5 rounded-md bg-[#DBEAFE] text-[#1D4ED8]">10A</span><span class="text-[12px] font-bold px-2 py-0.5 rounded-md bg-[#FCE7F3] text-[#9D174D]">11A</span><span class="text-[12px] font-bold px-2 py-0.5 rounded-md bg-[#FCE7F3] text-[#9D174D]">11B</span><span class="text-[12px] font-bold px-2 py-0.5 rounded-md bg-[#DBEAFE] text-[#1D4ED8]">12A</span><span class="text-[12px] font-bold px-2 py-0.5 rounded-md bg-[#DBEAFE] text-[#1D4ED8]">12B</span></div></div><div class="bg-white border border-[#E7E5E4] rounded-xl overflow-hidden"><div class="flex items-center justify-between px-3 py-2 bg-[#F8FAFC] border-b border-[#E7E5E4]"><div><span class="text-[11px] font-bold text-[#78716C] tracking-wider">訂位 B</span><span class="ml-2 text-[11px] text-[#A8A29E]">No. 00059</span></div><div class="flex items-center gap-2.5"><span class="text-[11px] text-[#78716C]">成人4 / 兒童1</span><span class="text-[13px] font-bold text-[#1C1917]">¥5,180</span></div></div><div class="px-3 py-2.5 flex flex-wrap gap-1.5"><span class="text-[12px] font-bold px-2 py-0.5 rounded-md bg-[#DBEAFE] text-[#1D4ED8]">10B</span><span class="text-[12px] font-bold px-2 py-0.5 rounded-md bg-[#DBEAFE] text-[#1D4ED8]">11C</span><span class="text-[12px] font-bold px-2 py-0.5 rounded-md bg-[#DBEAFE] text-[#1D4ED8]">11D</span><span class="text-[12px] font-bold px-2 py-0.5 rounded-md bg-[#DBEAFE] text-[#1D4ED8]">12C</span><span class="text-[12px] font-bold px-2 py-0.5 rounded-md bg-[#FCE7F3] text-[#9D174D]">12D</span></div></div></div>`, transitRoute: { overview: { depTime: '11:00', arrTime: '12:25', duration: '約1小時25分', fare: '特急券另購 (已訂)', transfers: '0回 (直達)' }, path: [ { type: 'station', name: '新宿 (小田急線地下月台)' }, { type: 'leg', mode: 'train', color: 'border-[#0080C6]', bg: 'bg-[#E5F5FC]', text: 'text-[#005C8F]', name: '小田急ロマンスカー EXE10 箱根5號', direction: '箱根湯本行 (直達・無停車)', time: '11:00 → 12:25', stops: '直達', platform: '地下月台 (出發前確認)', duration: '85分' }, { type: 'station', name: '箱根湯本' } ], reminders: ["對號入座，兩組均在 03 號車廂 Row 10–12，上車前確認車廂號碼。", "ロマンスカー為特急列車，票券含特急券費用，無需額外補票。"] } } },
                     { time: '12:30', title: '箱根湯本 午餐', desc: '車站周邊用餐', icon: 'fa-utensils', isRestaurant: true, details: { restaurantNotes: '10人團隊用餐不易，強烈建議找可「分桌」的餐廳（如蕎麥麵店、洋食餐廳），以節省候位時間。', map: { name: '箱根湯本站前商店街', address: '神奈川県足柄下郡箱根町湯本', distance: '🚶♂️ 車站正前方', query: '箱根湯本駅' } } },
                     { time: '14:00', title: '箱根登山電車 → 強羅', desc: '前往半山腰', icon: 'fa-train-tram', details: { notes: '搭乘箱根登山電車(往強羅)，車程約 40 分鐘。電車以「之」字形爬升，非常有特色。', map: { name: '強羅站 (箱根登山鐵道)', address: '神奈川県足柄下郡箱根町強羅1300', distance: '🚞 箱根湯本搭乘登山電車約 40 分鐘', query: '強羅駅' } } }
                 ]
@@ -554,10 +562,19 @@
                 const encodedQuery = encodeURIComponent(mapData.query || mapData.address);
                 const gmapsDirUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedQuery}`;
                 const gmapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
-                
+                const gmapsEmbedUrl = `https://maps.google.com/maps?q=${encodedQuery}&hl=zh-TW&z=15&output=embed`;
+
                 document.getElementById('sheet-map-nav-btn').href = gmapsDirUrl;
                 document.getElementById('sheet-map-view-btn').href = gmapsSearchUrl;
-                document.getElementById('sheet-map-img-link').href = gmapsSearchUrl;
+
+                const mapIframe = document.getElementById('sheet-map-iframe');
+                const mapPlaceholder = document.getElementById('sheet-map-placeholder');
+                mapPlaceholder.classList.remove('hidden');
+                mapIframe.src = '';
+                setTimeout(() => {
+                    mapIframe.src = gmapsEmbedUrl;
+                    mapIframe.onload = () => mapPlaceholder.classList.add('hidden');
+                }, 50);
 
                 const noteEl = document.getElementById('sheet-map-note');
                 if (mapData.note) {
@@ -589,8 +606,12 @@
             }
 
             const notesBlock = document.getElementById('sheet-notes-block');
-            if(event.details && event.details.notes) {
-                document.getElementById('sheet-notes').textContent = event.details.notes;
+            const notesEl = document.getElementById('sheet-notes');
+            if(event.details && event.details.notesHtml) {
+                notesEl.innerHTML = event.details.notesHtml;
+                notesBlock.classList.remove('hidden');
+            } else if(event.details && event.details.notes) {
+                notesEl.textContent = event.details.notes;
                 notesBlock.classList.remove('hidden');
             } else {
                 notesBlock.classList.add('hidden');
