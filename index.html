@@ -498,32 +498,31 @@
                     }
                     
                     <div class="itinerary-card bg-white rounded-[24px] p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-[#F5F5F4] cursor-pointer relative overflow-hidden group" id="event-card-${dayId}-${idx}" onclick="openSheet('${eventDataStr}')">
-                        <div class="card-inner flex items-start gap-4" style="padding-right:${event.tag ? '112px' : '52px'}">
+                        <div class="card-inner flex items-start gap-4 pr-10">
 
                             <!-- 左側：視覺分類 Icon 錨點 -->
                             <div class="w-[52px] h-[52px] shrink-0 rounded-[18px] ${iconStyle.bg} ${iconStyle.border} border flex items-center justify-center relative z-10 shadow-sm transition-transform duration-300 group-active:scale-95">
                                 <i class="fa-solid ${event.icon} ${iconStyle.text} text-[22px]"></i>
                             </div>
 
-                            <!-- 右側：內容區塊與呼吸感排版 -->
+                            <!-- 右側：內容區塊 -->
                             <div class="flex-1 min-w-0 pt-0.5">
-                                <div class="mb-1.5">
+                                <!-- 時間 + Tag 同排 -->
+                                <div class="flex items-center gap-2 mb-1.5 flex-wrap">
                                     <div class="text-[13px] font-bold text-[#A8A29E] tracking-wider flex items-center gap-1.5">
                                         <i class="fa-regular fa-clock text-[11px] opacity-70"></i> ${event.time}
                                     </div>
+                                    ${event.tag ? `<span class="${event.tag.color} text-[10px] font-bold px-2 py-0.5 rounded-md tracking-wider border whitespace-nowrap">${event.tag.text}</span>` : ''}
                                 </div>
                                 <h3 class="font-serif text-[18px] font-bold text-[#1C1917] leading-snug mb-1.5">${event.title}</h3>
                                 <p class="text-[14px] text-[#78716C] leading-relaxed line-clamp-2">${event.desc}</p>
                             </div>
 
                         </div>
-                        <!-- Tag + Checkbox 右側固定區 -->
-                        <div class="absolute top-1/2 right-4 -translate-y-1/2 z-10 flex items-center" style="gap:8px;">
-                            ${event.tag ? `<span class="${event.tag.color} text-[10px] font-bold px-2 py-0.5 rounded-md tracking-wider border whitespace-nowrap">${event.tag.text}</span>` : ''}
-                            <button id="done-btn-${dayId}-${idx}" onclick="toggleDone(event, '${dayId}', ${idx})" class="w-9 h-9 flex items-center justify-center rounded-full active:scale-90 transition-transform duration-150 shrink-0" aria-label="標記完成">
-                                <i class="fa-regular fa-circle text-[#D6D3D1] text-[22px]"></i>
-                            </button>
-                        </div>
+                        <!-- Checkbox 固定右上角 -->
+                        <button id="done-btn-${dayId}-${idx}" onclick="toggleDone(event, '${dayId}', ${idx})" class="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-full active:scale-90 transition-transform duration-150" aria-label="標記完成">
+                            <i class="fa-regular fa-circle text-[#D6D3D1] text-[22px]"></i>
+                        </button>
                     </div>
                 </div>
                 `;
