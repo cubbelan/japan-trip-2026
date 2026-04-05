@@ -39,6 +39,8 @@
         /* 卡片與動畫 */
         .itinerary-card { transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease; }
         .itinerary-card:active { transform: scale(0.98); }
+        .card-inner { transition: opacity 0.25s ease; }
+        .card-done .card-inner { opacity: 0.35; }
         .fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
         
         @keyframes fadeIn {
@@ -295,7 +297,7 @@
                 events: [
                     { time: '09:40 出發', title: 'JL96 松山 → 羽田', desc: '搭乘日本航空去程航班', icon: 'fa-plane-departure', tag: { text: '航班', color: 'bg-blue-50 text-blue-700 border-blue-200' }, details: { notes: '09:40 松山出發，13:50 抵達東京羽田機場。請提早於 07:40 抵達松山機場辦理報到與托運行李。\n\n✅ 入境後記得至航廈內辦理日本旅遊保險（如有需要），或確認出發前已完成線上投保。', map: { name: '松山機場 (出發)', address: '台北市松山區敦化北路340-9號', distance: '🛫 飛往東京羽田機場', query: '台北松山機場' } } },
                     { 
-                        time: '14:50', title: '羽田空港 → 新宿', desc: '利木津巴士・第3航廈発', icon: 'fa-bus', tag: { text: '需分組', color: 'bg-gray-50 text-gray-600 border-gray-200' },
+                        time: '14:50', title: '羽田空港 → 新宿', desc: '利木津巴士・第3航廈発', icon: 'fa-bus',
                         details: {
                             notesHtml: `<div class="space-y-3"><div class="text-[12px] font-bold text-[#57534E] mb-1"><i class="fa-solid fa-bus mr-1.5 opacity-60"></i>利木津巴士・羽田第3航廈 → 新宿駅西口〔京王百貨店前〕</div><div class="bg-white border border-[#E7E5E4] rounded-xl overflow-hidden"><div class="grid grid-cols-3 text-center text-[11px] font-bold text-[#78716C] bg-[#F8FAFC] border-b border-[#E7E5E4] px-2 py-2"><span>班次</span><span>第3航廈 発</span><span>新宿西口 着</span></div><div class="divide-y divide-[#F5F5F4]"><div class="grid grid-cols-3 text-center px-2 py-2.5 text-[13px] text-[#78716C]"><span class="text-[12px]">前一班</span><span>14:40</span><span>15:35</span></div><div class="grid grid-cols-3 text-center px-2 py-2.5 text-[13px] font-bold text-[#1C1917] bg-[#FFFBEB]"><span class="text-[11px] font-bold text-[#92400E] bg-[#FEF3C7] rounded-full px-1.5">搭乘</span><span>14:50</span><span>15:45</span></div><div class="grid grid-cols-3 text-center px-2 py-2.5 text-[13px] text-[#78716C]"><span class="text-[12px]">後一班</span><span>15:00</span><span>15:55</span></div></div></div><div class="bg-[#FFFBEB] border border-[#FEF3C7] rounded-xl px-3 py-2.5 text-[12px] text-[#92400E]"><i class="fa-solid fa-circle-info mr-1"></i>10人團隊攜帶大型行李，建議分組搭乘，推車與行李上下車請放慢腳步。</div></div>`,
                             transitRoute: {
@@ -480,7 +482,7 @@
             if (data.notice) { noticeEl.textContent = data.notice; noticeEl.classList.remove('hidden'); }
             else { noticeEl.classList.add('hidden'); }
 
-            const timelineHtml = data.events.map((event) => {
+            const timelineHtml = data.events.map((event, idx) => {
                 const eventDataStr = encodeURIComponent(JSON.stringify(event));
                 // 取得對應類型的 Icon 樣式設定
                 const iconStyle = getIconCategoryStyle(event.icon);
@@ -495,32 +497,69 @@
                       `<div class="absolute left-[17px] top-[41px] w-2.5 h-2.5 rounded-full border-2 border-[#2C3E50] bg-[#F9F8F6] ring-4 ring-[#F9F8F6] z-10"></div>`
                     }
                     
-                    <div class="itinerary-card bg-white rounded-[24px] p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-[#F5F5F4] cursor-pointer relative overflow-hidden group" onclick="openSheet('${eventDataStr}')">
-                        <div class="flex items-start gap-4">
-                            
-                            <!-- [全新] 左側：視覺分類 Icon 錨點 -->
+                    <div class="itinerary-card bg-white rounded-[24px] p-5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] border border-[#F5F5F4] cursor-pointer relative overflow-hidden group" id="event-card-${dayId}-${idx}" onclick="openSheet('${eventDataStr}')">
+                        <div class="card-inner flex items-start gap-4" style="padding-right:${event.tag ? '112px' : '52px'}">
+
+                            <!-- 左側：視覺分類 Icon 錨點 -->
                             <div class="w-[52px] h-[52px] shrink-0 rounded-[18px] ${iconStyle.bg} ${iconStyle.border} border flex items-center justify-center relative z-10 shadow-sm transition-transform duration-300 group-active:scale-95">
                                 <i class="fa-solid ${event.icon} ${iconStyle.text} text-[22px]"></i>
                             </div>
-                            
+
                             <!-- 右側：內容區塊與呼吸感排版 -->
                             <div class="flex-1 min-w-0 pt-0.5">
-                                <div class="flex justify-between items-start gap-2 mb-1.5">
+                                <div class="mb-1.5">
                                     <div class="text-[13px] font-bold text-[#A8A29E] tracking-wider flex items-center gap-1.5">
                                         <i class="fa-regular fa-clock text-[11px] opacity-70"></i> ${event.time}
                                     </div>
-                                    ${event.tag ? `<span class="${event.tag.color} text-[10px] font-bold px-2 py-0.5 rounded-md tracking-wider border whitespace-nowrap shrink-0">${event.tag.text}</span>` : ''}
                                 </div>
                                 <h3 class="font-serif text-[18px] font-bold text-[#1C1917] leading-snug mb-1.5">${event.title}</h3>
                                 <p class="text-[14px] text-[#78716C] leading-relaxed line-clamp-2">${event.desc}</p>
                             </div>
-                            
+
+                        </div>
+                        <!-- Tag + Checkbox 右側固定區 -->
+                        <div class="absolute top-1/2 right-4 -translate-y-1/2 z-10 flex items-center" style="gap:8px;">
+                            ${event.tag ? `<span class="${event.tag.color} text-[10px] font-bold px-2 py-0.5 rounded-md tracking-wider border whitespace-nowrap">${event.tag.text}</span>` : ''}
+                            <button id="done-btn-${dayId}-${idx}" onclick="toggleDone(event, '${dayId}', ${idx})" class="w-9 h-9 flex items-center justify-center rounded-full active:scale-90 transition-transform duration-150 shrink-0" aria-label="標記完成">
+                                <i class="fa-regular fa-circle text-[#D6D3D1] text-[22px]"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
                 `;
             }).join('');
             document.getElementById('timeline-container').innerHTML = timelineHtml;
+
+            // 還原已完成狀態
+            const done = JSON.parse(localStorage.getItem('jp_done') || '{}');
+            data.events.forEach((_, idx) => {
+                if (done[`${dayId}_${idx}`]) {
+                    const card = document.getElementById(`event-card-${dayId}-${idx}`);
+                    const btn = document.getElementById(`done-btn-${dayId}-${idx}`);
+                    if (card && btn) applyDoneState(card, btn, true);
+                }
+            });
+        }
+
+        function applyDoneState(card, btn, isDone) {
+            if (isDone) {
+                card.classList.add('card-done');
+                btn.innerHTML = '<i class="fa-solid fa-circle-check text-[22px]" style="color:#4ADE80"></i>';
+            } else {
+                card.classList.remove('card-done');
+                btn.innerHTML = '<i class="fa-regular fa-circle text-[#D6D3D1] text-[22px]"></i>';
+            }
+        }
+
+        function toggleDone(e, dayId, idx) {
+            e.stopPropagation();
+            const done = JSON.parse(localStorage.getItem('jp_done') || '{}');
+            const key = `${dayId}_${idx}`;
+            done[key] ? delete done[key] : (done[key] = true);
+            localStorage.setItem('jp_done', JSON.stringify(done));
+            const card = document.getElementById(`event-card-${dayId}-${idx}`);
+            const btn = document.getElementById(`done-btn-${dayId}-${idx}`);
+            applyDoneState(card, btn, !!done[key]);
         }
 
         // --- 以下為 Transit UI、Sheet 開關、地圖模組等功能 (與 v1.0 完全相同) ---
