@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>日本家族旅行 2026 | 精緻行程看板 v1.1</title>
+    <title>本行程僅供</title>
     <!-- Favicon & Apple Touch Icon: 櫻花旅行主題 -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232C3E50'/%3E%3Cstop offset='100%25' stop-color='%2334495E'/%3E%3C/linearGradient%3E%3ClinearGradient id='pk' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23FBBFCA'/%3E%3Cstop offset='100%25' stop-color='%23F9A8B8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='128' height='128' rx='28' fill='url(%23bg)'/%3E%3Cg transform='translate(64,62)'%3E%3Cg fill='url(%23pk)' opacity='.95'%3E%3Cellipse cx='0' cy='-22' rx='9' ry='18' /%3E%3Cellipse cx='0' cy='-22' rx='9' ry='18' transform='rotate(72)'/%3E%3Cellipse cx='0' cy='-22' rx='9' ry='18' transform='rotate(144)'/%3E%3Cellipse cx='0' cy='-22' rx='9' ry='18' transform='rotate(216)'/%3E%3Cellipse cx='0' cy='-22' rx='9' ry='18' transform='rotate(288)'/%3E%3C/g%3E%3Ccircle r='8' fill='%23F9E4B7' opacity='.9'/%3E%3C/g%3E%3Cg transform='translate(96,28) rotate(30)' fill='white' opacity='.85'%3E%3Cpath d='M0-3 L-12 2 L-10 0 L-12-2 Z'/%3E%3Ccircle r='2.5'/%3E%3C/g%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232C3E50'/%3E%3Cstop offset='100%25' stop-color='%2334495E'/%3E%3C/linearGradient%3E%3ClinearGradient id='pk' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23FBBFCA'/%3E%3Cstop offset='100%25' stop-color='%23F9A8B8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23bg)'/%3E%3Cg transform='translate(90,88)'%3E%3Cg fill='url(%23pk)' opacity='.95'%3E%3Cellipse cx='0' cy='-30' rx='12' ry='25' /%3E%3Cellipse cx='0' cy='-30' rx='12' ry='25' transform='rotate(72)'/%3E%3Cellipse cx='0' cy='-30' rx='12' ry='25' transform='rotate(144)'/%3E%3Cellipse cx='0' cy='-30' rx='12' ry='25' transform='rotate(216)'/%3E%3Cellipse cx='0' cy='-30' rx='12' ry='25' transform='rotate(288)'/%3E%3C/g%3E%3Ccircle r='11' fill='%23F9E4B7' opacity='.9'/%3E%3C/g%3E%3Cg transform='translate(136,38) rotate(30)' fill='white' opacity='.85'%3E%3Cpath d='M0-4 L-16 3 L-14 0 L-16-3 Z'/%3E%3Ccircle r='3.5'/%3E%3C/g%3E%3C/svg%3E">
@@ -139,6 +139,38 @@
         <i class="fa-solid fa-chevron-up text-[14px]"></i>
     </button>
 
+    <!-- 初次進入 Checklist Popup -->
+    <div id="checklist-overlay" class="fixed inset-0 z-[70] flex items-center justify-center px-5" style="background:rgba(102,102,102,0.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);">
+        <div class="bg-white rounded-[32px] shadow-2xl w-full max-w-sm flex flex-col overflow-hidden" style="max-height:82vh;">
+            <div class="px-6 pt-7 pb-3 shrink-0 text-center">
+                <h2 class="font-serif text-xl font-bold text-[#1C1917]">旅行宣示</h2>
+                <p class="text-xs text-[#78716C] mt-1">請確認以下事項，準備出發 🌸</p>
+            </div>
+            <div id="checklist-scroll" class="px-6 pb-2" style="flex:1 1 0%;min-height:0;overflow-y:auto;">
+                <img src="https://media.makeameme.org/created/i-do-declare-a0c110a3e9.jpg" alt="I do declare" class="w-full rounded-2xl mb-4 object-cover" style="height:140px;object-position:center top;">
+                <ul id="checklist-items" class="flex flex-col gap-3">
+                    <li><label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" class="checklist-cb mt-0.5 w-5 h-5 rounded accent-[#2C3E50] shrink-0 cursor-pointer"><span class="text-[15px] text-[#1C1917] leading-snug"><span class="font-bold text-[#2C3E50] mr-1">1.</span>要多說「出遊就是幸福，今天的我好開心」</span></label></li>
+                    <li><label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" class="checklist-cb mt-0.5 w-5 h-5 rounded accent-[#2C3E50] shrink-0 cursor-pointer"><span class="text-[15px] text-[#1C1917] leading-snug"><span class="font-bold text-[#2C3E50] mr-1">2.</span>當「累了走不動、身體不舒服」，絕對要說</span></label></li>
+                    <li><label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" class="checklist-cb mt-0.5 w-5 h-5 rounded accent-[#2C3E50] shrink-0 cursor-pointer"><span class="text-[15px] text-[#1C1917] leading-snug"><span class="font-bold text-[#2C3E50] mr-1">3.</span>尊重彼此分開行動，各自去追尋快樂</span></label></li>
+                    <li><label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" class="checklist-cb mt-0.5 w-5 h-5 rounded accent-[#2C3E50] shrink-0 cursor-pointer"><span class="text-[15px] text-[#1C1917] leading-snug"><span class="font-bold text-[#2C3E50] mr-1">4.</span>尊重規劃行程的人</span></label></li>
+                    <li><label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" class="checklist-cb mt-0.5 w-5 h-5 rounded accent-[#2C3E50] shrink-0 cursor-pointer"><span class="text-[15px] text-[#1C1917] leading-snug"><span class="font-bold text-[#2C3E50] mr-1">5.</span>行程可彈性調整，開心出門，愉快回家</span></label></li>
+                    <li><label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" class="checklist-cb mt-0.5 w-5 h-5 rounded accent-[#2C3E50] shrink-0 cursor-pointer"><span class="text-[15px] text-[#1C1917] leading-snug"><span class="font-bold text-[#2C3E50] mr-1">6.</span>遇到突發狀況，優先解決，不責怪對方</span></label></li>
+                    <li><label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" class="checklist-cb mt-0.5 w-5 h-5 rounded accent-[#2C3E50] shrink-0 cursor-pointer"><span class="text-[15px] text-[#1C1917] leading-snug"><span class="font-bold text-[#2C3E50] mr-1">7.</span>出遊就是幸福，下雨也浪漫、走錯路是體驗</span></label></li>
+                    <li class="mt-1 pt-3 border-t border-[#E7E5E4]"><label class="flex items-center justify-center gap-2.5 cursor-pointer py-1"><input type="checkbox" id="checklist-all" class="w-5 h-5 rounded accent-[#2C3E50] shrink-0 cursor-pointer"><span class="text-[15px] font-bold text-[#2C3E50] leading-snug">以上全部勾選</span></label></li>
+                </ul>
+            </div>
+            <!-- 下滑提示：漸層 + 箭頭 -->
+            <div id="scroll-hint" class="pointer-events-none shrink-0 flex items-end justify-center pb-1 transition-opacity duration-300" style="height:40px;margin-top:-40px;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0.95) 60%);">
+                <i class="fa-solid fa-chevron-down text-[#2C3E50] text-xs animate-bounce opacity-70"></i>
+            </div>
+            <div class="px-6 pt-3 pb-7 shrink-0">
+                <button id="checklist-confirm" onclick="closeChecklist()" disabled class="w-full py-3.5 rounded-2xl text-[15px] font-bold transition-all duration-200 bg-[#E7E5E4] text-[#A8A29E] cursor-not-allowed">
+                    出發！
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Sheet 遮罩層 -->
     <div id="overlay" class="fixed inset-0 z-40 opacity-0 pointer-events-none" onclick="closeSheet()"></div>
 
@@ -258,7 +290,7 @@
             {
                 id: 'day1', date: '4/6', weekday: '一', 
                 title: '抵達與新宿安頓', subtitle: '第一天抵達日本，以辦理入住與周邊熟悉為主，儲備隔天體力。',
-                image: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80',
+                image: 'https://a0.muscache.com/im/pictures/miso/Hosting-1460406426159210801/original/7741c7eb-fef7-406b-99aa-5518ad116cd1.jpeg?im_w=1200',
                 locationName: 'Shinjuku, Tokyo', weather: { temp: '16°C', condition: '多雲', icon: 'fa-cloud' },
                 events: [
                     { time: '09:40 出發', title: 'JL96 松山 → 羽田', desc: '搭乘日本航空去程航班', icon: 'fa-plane-departure', tag: { text: '航班', color: 'bg-blue-50 text-blue-700 border-blue-200' }, details: { notes: '09:40 松山出發，13:50 抵達東京羽田機場。請提早於 07:40 抵達松山機場辦理報到與托運行李。\n\n✅ 入境後記得至航廈內辦理日本旅遊保險（如有需要），或確認出發前已完成線上投保。', map: { name: '松山機場 (出發)', address: '台北市松山區敦化北路340-9號', distance: '🛫 飛往東京羽田機場', query: '台北松山機場' } } },
@@ -291,7 +323,8 @@
                     { time: '09:00', title: '出發前往上野', desc: 'JR 山手線', icon: 'fa-train', details: { transitRoute: { overview: { depTime: '09:00', arrTime: '09:25', duration: '25分', fare: '約 ￥210', transfers: '0回 (直達)' }, path: [ { type: 'walk', instruction: '從民宿步行約 5 分鐘' }, { type: 'station', name: '新大久保' }, { type: 'leg', mode: 'train', color: 'border-[#84C92B]', bg: 'bg-[#F2F9E8]', text: 'text-[#5A8F1A]', name: 'JR山手線', direction: '外回‧池袋/上野方面', time: '09:05 - 09:25', stops: '10站 (示意)', platform: '第2月台 (示意)', duration: '20分' }, { type: 'station', name: '上野 (公園口出站)' } ], reminders: ["推車族建議：抵達上野站後請務必尋找「公園口」出站，出站即是上野公園，且備有電梯較方便移動。"] } } },
                     { time: '09:40', title: '上野公園散步', desc: '入館前放電', icon: 'fa-tree', details: { notes: '進室內館前，可先短暫散步 15-20 分鐘讓幼兒跑跳放電。4月初為櫻花季，人潮可能較多需注意。', map: { name: '上野恩賜公園', address: '東京都台東区上野公園', distance: '🚶♂️ 距上野站公園口步行 1 分鐘', query: '上野恩賜公園' } } },
                     { time: '10:00', title: '國立科學博物館', desc: '恐龍與親子展示', icon: 'fa-building-columns', tag: { text: '親子友善', color: 'bg-green-50 text-green-700 border-green-200' }, details: { notes: '一般展示無需預約。推車可直接入館。館內有幼兒互動區「コンパス」(需另預約)。', map: { name: '國立科學博物館', address: '東京都台東区上野公園 7-20', distance: '🚶♂️ 距上野站公園口步行約 5-8 分鐘', query: '国立科学博物館', note: '推車建議走主建築右側的無障礙坡道進入' } } },
-                    { time: '12:30', title: '午餐時間', desc: '公園或阿美橫丁', icon: 'fa-utensils', isRestaurant: true, details: { restaurantNotes: '建議避開尖峰時段，或選擇上野公園內的精緻食堂 (如上野精養軒、韻松亭)，空間較寬敞適合推車。若前往阿美橫丁人潮較擁擠需留意。' } }
+                    { time: '12:30', title: '午餐時間', desc: '公園或阿美橫丁', icon: 'fa-utensils', isRestaurant: true, details: { restaurantNotes: '建議避開尖峰時段，或選擇上野公園內的精緻食堂 (如上野精養軒、韻松亭)，空間較寬敞適合推車。若前往阿美橫丁人潮較擁擠需留意。' } },
+                    { time: '13:00', title: '各家族自由活動', desc: '自由安排・各自行動', icon: 'fa-map-pin', tag: { text: '自由行動', color: 'bg-purple-50 text-purple-700 border-purple-200' }, details: { notes: '13:00 起各家族自行安排行程，不需集合。可依幼兒狀態選擇繼續逛上野、前往阿美橫丁、回民宿休息，或探索其他周邊景點。' } }
                 ]
             },
             {
@@ -369,8 +402,8 @@
                 image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80',
                 locationName: 'Narita Airport, Tokyo', weather: { temp: '14°C', condition: '晴朗', icon: 'fa-sun' },
                 events: [
-                    { time: '前往機場', title: '箱根 → 成田機場', desc: '搭乘特快列車', icon: 'fa-train', details: { notes: '自箱根搭乘小田急至新宿，轉乘 JR 成田特快（N\'EX）直達成田機場。建議起飛前 3 小時抵達航廈辦理手續。' } },
-                    { time: '出發', title: 'JX803 成田 → 桃園', desc: '星宇航空', icon: 'fa-plane-departure', tag: { text: '航班', color: 'bg-blue-50 text-blue-700 border-blue-200' }, details: { notes: '星宇航空 JX803。成田機場第一航廈（T1）出發。請提前確認登機門及最新班機資訊。' } }
+                    { time: '前往機場', title: '箱根 → 成田機場 T1', desc: '成田機場・第一航廈（T1）', icon: 'fa-train', details: { notes: '自箱根搭乘小田急至新宿，轉乘 JR 成田特快（N\'EX）直達成田機場第一航廈（T1）。建議起飛前 3 小時抵達航廈辦理手續。' } },
+                    { time: '待確認', title: 'JX803 成田 → 桃園', desc: '星宇航空・第一航廈（T1）出發', icon: 'fa-plane-departure', tag: { text: '航班', color: 'bg-blue-50 text-blue-700 border-blue-200' }, details: { notes: '星宇航空 JX803。成田機場第一航廈（T1）出發。請提前確認確切起飛時間、登機門及最新班機資訊。' } }
                 ]
             }
         ];
@@ -707,6 +740,54 @@
             window.toastTimeout = setTimeout(() => {
                 toast.classList.add('opacity-0', 'translate-y-2');
             }, 2000);
+        }
+
+        // Checklist Popup
+        (function() {
+            if (localStorage.getItem('jp_checklist_done')) {
+                document.getElementById('checklist-overlay').style.display = 'none';
+                return;
+            }
+            const cbs = document.querySelectorAll('.checklist-cb');
+            const allCb = document.getElementById('checklist-all');
+            const confirmBtn = document.getElementById('checklist-confirm');
+            const scrollEl = document.getElementById('checklist-scroll');
+            const hint = document.getElementById('scroll-hint');
+
+            function syncConfirmBtn() {
+                const allChecked = Array.from(cbs).every(c => c.checked);
+                allCb.checked = allChecked;
+                confirmBtn.disabled = !allChecked;
+                if (allChecked) {
+                    confirmBtn.classList.replace('bg-[#E7E5E4]', 'bg-[#2C3E50]');
+                    confirmBtn.classList.replace('text-[#A8A29E]', 'text-white');
+                    confirmBtn.classList.remove('cursor-not-allowed');
+                } else {
+                    confirmBtn.classList.replace('bg-[#2C3E50]', 'bg-[#E7E5E4]');
+                    confirmBtn.classList.replace('text-white', 'text-[#A8A29E]');
+                    confirmBtn.classList.add('cursor-not-allowed');
+                }
+            }
+
+            function updateHint() {
+                const atBottom = scrollEl.scrollHeight - scrollEl.scrollTop <= scrollEl.clientHeight + 8;
+                hint.style.opacity = atBottom ? '0' : '1';
+            }
+
+            cbs.forEach(cb => { cb.addEventListener('change', syncConfirmBtn); });
+            allCb.addEventListener('change', () => {
+                cbs.forEach(cb => { cb.checked = allCb.checked; });
+                syncConfirmBtn();
+            });
+
+            scrollEl.addEventListener('scroll', updateHint, { passive: true });
+            // 初始判斷是否已有捲動空間
+            setTimeout(updateHint, 50);
+        })();
+
+        function closeChecklist() {
+            localStorage.setItem('jp_checklist_done', '1');
+            document.getElementById('checklist-overlay').style.display = 'none';
         }
 
         // 回到頂部按鈕顯示控制
