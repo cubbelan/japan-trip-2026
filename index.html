@@ -18,6 +18,7 @@
         
         :root {
             --bg-color: #F9F8F6;
+            --sticky-bg: #F9F8F6;
             --accent: #2C3E50;
         }
 
@@ -80,7 +81,7 @@
 <body>
 
     <!-- 主容器 -->
-    <div class="max-w-xl mx-auto min-h-screen bg-[#F9F8F6] relative shadow-sm overflow-hidden flex flex-col">
+    <div class="max-w-xl mx-auto min-h-screen bg-[#F9F8F6] relative shadow-sm flex flex-col">
         
         <!-- 頂部資訊區 -->
         <header class="pt-12 px-6 pb-5">
@@ -95,8 +96,10 @@
         </header>
 
         <!-- 日期選擇器 (橫向捲動) -->
-        <div class="sticky top-0 z-20 bg-[#F9F8F6]/95 backdrop-blur-md pt-1 pb-4">
+        <div class="sticky top-0 z-20 bg-[#F9F8F6]/95 backdrop-blur-md pt-1 pb-4" style="position:sticky;">
             <div class="flex overflow-x-auto no-scrollbar gap-2.5 snap-x" id="date-tabs-container" style="padding-left:24px; padding-right:24px; scroll-padding-left:24px;"></div>
+            <!-- 底部漸層淡出 -->
+            <div class="pointer-events-none absolute left-0 right-0 bottom-0 translate-y-full" style="height:36px; background: linear-gradient(to bottom, rgba(249,248,246,0.35) 0%, rgba(249,248,246,0.15) 40%, rgba(249,248,246,0) 100%);"></div>
         </div>
 
         <!-- 每日內容區塊 -->
@@ -250,25 +253,23 @@
                 image: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80',
                 locationName: 'Shinjuku, Tokyo', weather: { temp: '16°C', condition: '多雲', icon: 'fa-cloud' },
                 events: [
-                    { time: '09:10 出發', title: 'JL96 松山 → 羽田', desc: '搭乘日本航空去程航班', icon: 'fa-plane-departure', tag: { text: '航班', color: 'bg-blue-50 text-blue-700 border-blue-200' }, details: { notes: '請提早於 07:10 抵達松山機場辦理報到與托運行李。', map: { name: '松山機場 (出發)', address: '台北市松山區敦化北路340-9號', distance: '🛫 飛往東京羽田機場', query: '台北松山機場' } } },
+                    { time: '09:40 出發', title: 'JL96 松山 → 羽田', desc: '搭乘日本航空去程航班', icon: 'fa-plane-departure', tag: { text: '航班', color: 'bg-blue-50 text-blue-700 border-blue-200' }, details: { notes: '09:40 松山出發，13:50 抵達東京羽田機場。請提早於 07:40 抵達松山機場辦理報到與托運行李。\n\n✅ 入境後記得至航廈內辦理日本旅遊保險（如有需要），或確認出發前已完成線上投保。', map: { name: '松山機場 (出發)', address: '台北市松山區敦化北路340-9號', distance: '🛫 飛往東京羽田機場', query: '台北松山機場' } } },
                     { 
-                        time: '14:30', title: '羽田空港 → 大久保', desc: '機場交通移動', icon: 'fa-bus', tag: { text: '需分組', color: 'bg-gray-50 text-gray-600 border-gray-200' }, 
-                        details: { 
+                        time: '14:50', title: '羽田空港 → 新宿', desc: '利木津巴士・第3航廈発', icon: 'fa-bus', tag: { text: '需分組', color: 'bg-gray-50 text-gray-600 border-gray-200' },
+                        details: {
+                            notesHtml: `<div class="space-y-3"><div class="text-[12px] font-bold text-[#57534E] mb-1"><i class="fa-solid fa-bus mr-1.5 opacity-60"></i>利木津巴士・羽田第3航廈 → 新宿駅西口〔京王百貨店前〕</div><div class="bg-white border border-[#E7E5E4] rounded-xl overflow-hidden"><div class="grid grid-cols-3 text-center text-[11px] font-bold text-[#78716C] bg-[#F8FAFC] border-b border-[#E7E5E4] px-2 py-2"><span>班次</span><span>第3航廈 発</span><span>新宿西口 着</span></div><div class="divide-y divide-[#F5F5F4]"><div class="grid grid-cols-3 text-center px-2 py-2.5 text-[13px] text-[#78716C]"><span class="text-[12px]">前一班</span><span>14:40</span><span>15:35</span></div><div class="grid grid-cols-3 text-center px-2 py-2.5 text-[13px] font-bold text-[#1C1917] bg-[#FFFBEB]"><span class="text-[11px] font-bold text-[#92400E] bg-[#FEF3C7] rounded-full px-1.5">搭乘</span><span>14:50</span><span>15:45</span></div><div class="grid grid-cols-3 text-center px-2 py-2.5 text-[13px] text-[#78716C]"><span class="text-[12px]">後一班</span><span>15:00</span><span>15:55</span></div></div></div><div class="bg-[#FFFBEB] border border-[#FEF3C7] rounded-xl px-3 py-2.5 text-[12px] text-[#92400E]"><i class="fa-solid fa-circle-info mr-1"></i>10人團隊攜帶大型行李，建議分組搭乘，推車與行李上下車請放慢腳步。</div></div>`,
                             transitRoute: {
-                                overview: { depTime: '14:30 (估計)', arrTime: '15:40', duration: '約1小時10分', fare: '約 ￥1,450 (示意估算)', transfers: '1回' },
+                                overview: { depTime: '14:50', arrTime: '15:45', duration: '約55分', fare: '¥1,450 / 人', transfers: '0回 (直達)' },
                                 path: [
-                                    { type: 'station', name: '羽田機場第3航廈' },
-                                    { type: 'leg', mode: 'bus', color: 'border-amber-500', bg: 'bg-amber-50', text: 'text-amber-700', name: '利木津巴士', direction: '新宿站西口行', time: '14:30 - 15:25', stops: '直達', platform: '巴士乘車處', duration: '55分' },
-                                    { type: 'walk', instruction: '新宿站外步行轉乘 JR 線 (約 10 分鐘，需留意行李)' },
-                                    { type: 'station', name: '新宿' },
-                                    { type: 'leg', mode: 'train', color: 'border-[#F68B1E]', bg: 'bg-orange-50', text: 'text-orange-700', name: 'JR中央‧總武線', direction: '各站停車‧三鷹行', time: '15:35 - 15:37', stops: '1站', platform: '第16月台 (示意資訊)', duration: '2分' },
-                                    { type: 'station', name: '大久保 (北口)' }
+                                    { type: 'station', name: '羽田機場第3航廈 (バス乗り場)' },
+                                    { type: 'leg', mode: 'bus', color: 'border-amber-500', bg: 'bg-amber-50', text: 'text-amber-700', name: '東京空港交通 利木津巴士', direction: '新宿駅西口〔京王百貨店前〕行', time: '14:50 → 15:45', stops: '直達', platform: '第3航廈 1F バス乗り場', duration: '55分' },
+                                    { type: 'station', name: '新宿駅西口〔京王百貨店前〕' }
                                 ],
-                                reminders: ["10人團隊且攜帶大型行李，強烈建議第一段搭乘利木津巴士直達新宿，避免在機場線擠電車。", "原文提及若有需要可分組搭乘。推車與行李請於轉乘時放慢腳步。"]
+                                reminders: ["搭乘指定班次 14:50 発，若錯過可改搭後一班 15:00 発（抵達 15:55）。", "新宿西口下車後，步行至 JR 大久保站約 10 分鐘，或搭總武線 1 站。"]
                             }
-                        } 
+                        }
                     },
-                    { time: '17:00', title: '抵達大久保安頓', desc: '入住百人町 Check in', icon: 'fa-house', details: { notes: '抵達日本第一天，以休息為主。入住時間請依 Airbnb 房東確認為準。大久保站北口出來較近。', map: { name: '百人町 Airbnb (示意位置)', address: '東京都新宿区百人町 2-23-41', distance: '🚶♂️ 距大久保站北口步行約 5 分鐘', query: '東京都新宿区百人町2-23-41', note: '出站後請尋找超商旁巷子進入，為安靜的住宅區。' } } },
+                    { time: '17:00', title: '入住 Airbnb', desc: 'ie-tabi 百人町 2階 201号室', icon: 'fa-house', tag: { text: '已預訂', color: 'bg-green-50 text-green-700 border-green-200' }, details: { notesHtml: `<div class="space-y-3"><div class="flex items-center gap-2 text-[13px] font-bold text-[#15803D] bg-[#F0FDF4] border border-[#BBF7D0] rounded-lg px-3 py-2"><i class="fa-solid fa-circle-check"></i>ie-tabi・2階 201号室</div><a href="https://host-plus.jimdoweb.com/ie21/" target="_blank" class="flex items-center justify-between bg-[#F5F3FF] border border-[#DDD6FE] rounded-xl px-4 py-3 active:opacity-70 transition-opacity"><div class="flex items-center gap-2.5"><i class="fa-solid fa-house text-[#7C3AED] text-[15px]"></i><div><p class="text-[13px] font-bold text-[#4C1D95]">房源資訊頁</p><p class="text-[11px] text-[#7C3AED] mt-0.5">host-plus.jimdoweb.com</p></div></div><i class="fa-solid fa-arrow-up-right-from-square text-[#A78BFA] text-[12px]"></i></a><div class="text-[13px] text-[#78716C] leading-relaxed">抵達日本第一天以休息為主。大久保站北口出站步行約 5 分鐘。入住時間及取鑰方式請依房東確認。</div></div>`, map: { name: 'ie-tabi 201号室', address: '東京都新宿区百人町2丁目23-41', distance: '🚶 距大久保站北口步行約 5 分鐘', query: '東京都新宿区百人町2-23-41', note: '2階 201号室' } } },
                     { time: '18:00', title: '新大久保周邊用餐', desc: '提供新大久保親子餐廳，如 やよい軒', icon: 'fa-store', isRestaurant: true, details: { restaurantNotes: '提供新大久保周邊的親子友善餐廳選擇，例如「やよい軒 (彌生軒)」，擁有多樣定食且環境較適合家庭。如果太累，也可以直接在超市購買便當回民宿享用。', notes: '※ 提醒：4/9 必須完成 4/10 的行李宅配預約。', map: { name: 'やよい軒 新大久保店 (親子備案)', address: '東京都新宿区百人町2-15-22', distance: '🚶♂️ 距車站與民宿皆不遠', query: 'やよい軒 新大久保店' } } }
                 ]
             },
